@@ -4,10 +4,7 @@ gem "sinatra"
 gem "mongo_mapper"
 gem "bson_ext"
 gem "json"
-
-group :development, :test do
-  gem "dotenv"
-end
+gem "dotenv"
 
 group :test do
   gem "minitest"
