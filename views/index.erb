@@ -3,9 +3,16 @@
   <head>
     <title>Hookable</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <% @hook_deliveries.each do |delivery| %>
+      <h3><%= delivery.created_at %></h3>
+      <pre><code><%= delivery.pretty_headers %></code></pre>
       <pre><code><%= delivery.pretty_payload %></code></pre>
     <% end %>
 

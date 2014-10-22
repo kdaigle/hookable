@@ -10,8 +10,13 @@ end
 class HookDelivery
   include MongoMapper::Document
 
+  key :headers, String
   key :payload, String
   timestamps!
+
+  def pretty_headers
+    JSON.pretty_generate(JSON.parse(headers))
+  end
 
   def pretty_payload
     JSON.pretty_generate(JSON.parse(payload))
@@ -19,8 +24,18 @@ class HookDelivery
 end
 
 post "/" do
-  request.body.rewind
-  HookDelivery.create(:payload => request.body.read)
+  headers = {
+    "X-GitHub-Event"    => request["X-GitHub-Event"],
+    "X-GitHub-Delivery" => request["X-GitHub-Delivery"],
+    "X-Hub-Signature"   => request["X-Hub-Signature"]
+  }.to_json
+  payload = request.body.read
+
+  HookDelivery.create(
+    :payload => payload,
+    :headers => headers
+  )
+
   status 200
 end
 
