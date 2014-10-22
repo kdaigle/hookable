@@ -1,7 +1,7 @@
 require "bundler/setup"
 ENV["RACK_ENV"] ||= "development"
 Bundler.require(:default, ENV["RACK_ENV"].to_sym)
-Dotenv.load
+Dotenv.load unless ENV["RACK_ENV"] == "production"
 
 configure do
   MongoMapper.setup({'production' => {'uri' => ENV['MONGOHQ_URL']}}, 'production')
