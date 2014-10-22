@@ -10,11 +10,10 @@ configure do
 end
 
 post "/" do
-  puts request.inspect
   headers = {
-    "X-GitHub-Event"    => request.env["X-Github-Event"],
-    "X-GitHub-Delivery" => request.env["X-Github-Delivery"],
-    "X-Hub-Signature"   => request.env["X-Hub-Signature"]
+    "X-GitHub-Event"    => env["X-GitHub-Event"],
+    "X-GitHub-Delivery" => env["X-GitHub-Delivery"],
+    "X-Hub-Signature"   => env["X-Hub-Signature"]
   }.to_json
   payload = request.body.read
 
