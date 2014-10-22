@@ -10,6 +10,7 @@ configure do
 end
 
 post "/" do
+  puts request.env.inspect
   headers = {
     "X-GitHub-Event"    => request.env["X-Github-Event"],
     "X-GitHub-Delivery" => request.env["X-Github-Delivery"],
@@ -27,7 +28,6 @@ end
 
 get "/" do
   @hook_deliveries = HookDelivery.all
-  puts @hook_deliveries.inspect
   erb :index
 end
 
