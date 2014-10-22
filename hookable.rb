@@ -10,7 +10,7 @@ configure do
 end
 
 post "/" do
-  puts request.env.inspect
+  puts request.inspect
   headers = {
     "X-GitHub-Event"    => request.env["X-Github-Event"],
     "X-GitHub-Delivery" => request.env["X-Github-Delivery"],
