@@ -17,7 +17,9 @@
   </head>
   <body>
     <% @hook_deliveries.each do |delivery| %>
-      <h3 class="<%= delivery.secrets_match? ? "match" : "no-match" %>"><%= delivery.created_at %></h3>
+      <h3 class="<%= delivery.secrets_match? ? "match" : "no-match" %>">
+        <%= seconds_ago(delivery.seconds_ago) %>
+      </h3>
       <pre><code><%= delivery.pretty_headers %></code></pre>
       <pre><code><%= delivery.pretty_payload %></code></pre>
     <% end %>

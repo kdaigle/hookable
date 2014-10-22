@@ -3,39 +3,10 @@ ENV["RACK_ENV"] ||= "development"
 Bundler.require(:default, ENV["RACK_ENV"].to_sym)
 Dotenv.load
 
+require "./hook_delivery"
+
 configure do
   MongoMapper.setup({'production' => {'uri' => ENV['MONGOHQ_URL']}}, 'production')
-end
-
-class HookDelivery
-  include MongoMapper::Document
-
-  key :headers, String
-  key :payload, String
-  timestamps!
-
-  def secrets_match?
-    return false unless ENV["SECRET_TOKEN"]
-
-    signature = "sha1=" + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha1"), ENV["SECRET_TOKEN"], payload)
-    Rack::Utils.secure_compare(signature, headers["X-Hub-Signature"])
-  end
-
-  def headers
-    JSON.parse(super)
-  end
-
-  def payload
-    JSON.parse(super)
-  end
-
-  def pretty_headers
-    JSON.pretty_generate(headers)
-  end
-
-  def pretty_payload
-    JSON.pretty_generate(payload)
-  end
 end
 
 post "/" do
@@ -63,4 +34,18 @@ end
 delete "/" do
   HookDelivery.destroy_all
   status 200
+end
+
+####
+# Simple presentation helper
+####
+
+helpers do
+  def seconds_ago(number)
+    if number == 1
+      "#{number} second ago"
+    else
+      "#{number} seconds ago"
+    end
+  end
 end
