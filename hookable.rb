@@ -11,8 +11,8 @@ end
 
 post "/" do
   headers = {
-    "X-GitHub-Event"    => request.env["X-GitHub-Event"],
-    "X-GitHub-Delivery" => request.env["X-GitHub-Delivery"],
+    "X-GitHub-Event"    => request.env["X-Github-Event"],
+    "X-GitHub-Delivery" => request.env["X-Github-Delivery"],
     "X-Hub-Signature"   => request.env["X-Hub-Signature"]
   }.to_json
   payload = request.body.read
