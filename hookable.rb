@@ -26,7 +26,7 @@ post "/" do
 end
 
 get "/" do
-  @hook_deliveries = HookDelivery.sort(:created_at.desc)
+  @hook_deliveries = HookDelivery.sort(:created_at.desc).limit(8)
   erb :index
 end
 
