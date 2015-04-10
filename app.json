@@ -1,0 +1,7 @@
+{
+  "name": "Hookable",
+  "description": "A simple webapp that can collect and display webhooks.",
+  "repository": "https://github.com/kdaigle/hookable",
+  "keywords": ["webhooks", "hooks"],
+  "addons": ["mongodb:sandbox"]
+}
