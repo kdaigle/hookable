@@ -16,6 +16,8 @@
     </style>
   </head>
   <body>
+    <h1>Hookable</h1>
+    <p>There are <%= @hook_deliveries.size %> deliveries.</p>
     <% @hook_deliveries.each do |delivery| %>
       <h3 class="<%= delivery.secrets_match? ? "match" : "no-match" %>">
         <%= seconds_ago(delivery.seconds_ago) %>
