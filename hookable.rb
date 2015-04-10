@@ -6,7 +6,7 @@ Dotenv.load
 require "./hook_delivery"
 
 configure do
-  MongoMapper.setup({'production' => {'uri' => ENV['MONGOHQ_URL']}}, 'production')
+  MongoMapper.setup({'production' => {'uri' => ENV['MONGOLAB_URI']}}, 'production')
 end
 
 post "/" do
