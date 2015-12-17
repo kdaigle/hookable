@@ -45,9 +45,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bson_ext
   dotenv
   json
   minitest
   mongo_mapper
   sinatra
+
+BUNDLED WITH
+   1.10.6
